@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="アプリケーション - GREEアプリ">
+    <Link rel="event.addapp" href="http://sws.fstn.jp" method="GET" />
+    <Link rel="event.removeapp" href="http://sws.fstn.jp" method="GET" />
+  </ModulePrefs>
+  <Content view="touch" type="url" href="http://sws.fstn.jp"
+  allow_domains="sws.fstn.jp" />
+</Module>
