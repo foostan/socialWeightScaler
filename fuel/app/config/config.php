@@ -17,5 +17,11 @@
 
 return array(
     'base_url' => '/',
-    'default_timezone' => 'Asia/Tokyo'
+    'default_timezone' => 'Asia/Tokyo',
+	'always_load' => array(
+	    'packages' => array(
+	        'auth',
+	        'greepf',
+	    ),
+	),
 );

@@ -29,6 +29,9 @@ Autoloader::add_classes(array(
 	'Auth\\Auth_Login_SimpleAuth'      => __DIR__.'/classes/auth/login/simpleauth.php',
 	'Auth\\SimpleUserUpdateException'  => __DIR__.'/classes/auth/login/simpleauth.php',
 	'Auth\\SimpleUserWrongPassword'    => __DIR__.'/classes/auth/login/simpleauth.php',
+
+	'Auth\\Auth_Login_QuickAuth'	   => __DIR__.'/classes/auth/login/quickauth.php',
+	'Auth\\QuickUserUpdateException'   => __DIR__.'/classes/auth/login/quickauth.php',
 ));
 
 
