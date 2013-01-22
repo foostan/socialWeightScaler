@@ -1,12 +1,12 @@
 <?php
 
+namespace Greepf;
+
 // vim: foldmethod=marker
 
 /* Generic exception class
  */
-class OAuthException extends Exception {
-  // pass
-}
+class OAuthException extends \Exception {}
 
 class OAuthConsumer {
   public $key;
@@ -308,6 +308,7 @@ class OAuthRequest {
    * pretty much a helper function to set up the request
    */
   public static function from_consumer_and_token($consumer, $token, $http_method, $http_url, $parameters=NULL) {
+
     $parameters = ($parameters) ?  $parameters : array();
     $defaults = array("oauth_version" => OAuthRequest::$version,
                       "oauth_nonce" => OAuthRequest::generate_nonce(),
@@ -745,7 +746,7 @@ class OAuthDataStore {
 class OAuthUtil {
   public static function urlencode_rfc3986($input) {
   if (is_array($input)) {
-    return array_map(array('OAuthUtil', 'urlencode_rfc3986'), $input);
+    return array_map(array('Greepf\OAuthUtil', 'urlencode_rfc3986'), $input);
   } else if (is_scalar($input)) {
     return str_replace(
       '+',

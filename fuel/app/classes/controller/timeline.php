@@ -12,6 +12,7 @@
 class Controller_Timeline extends Controller_Template
 {
 	public $template = 'template';
+	private $greepf = null;
 
 	public function before(){
 		 parent::before();
@@ -20,6 +21,8 @@ class Controller_Timeline extends Controller_Template
 		{
 		    Response::redirect('auth/login');
 		}
+		$people = Greepf::people_api(array('selector'=>'@friends','fields'=>'id,nickname,thumbnailUrl,gender,age'));
+		var_dump($people);
 	}
 
 	/**

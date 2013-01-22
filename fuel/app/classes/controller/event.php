@@ -2,10 +2,12 @@
 class Controller_Event extends Controller{
 	private $_config = null;
 
+	public function before(){
+
+	}
+
 	public function action_addapp(){
-		$greepf = new Greepf();
-		if($greepf->validate_request()){
-			$id = $greepf->get_request_param('id');
+		if($id = Greepf::setup('cycle')){
 			$event_log_msg = '';
 			try{
 	    		if(Auth::forge('quickauth')->create_user($id)){
@@ -26,6 +28,7 @@ class Controller_Event extends Controller{
 				))
 			->execute();
 		}
+
 		return Response::forge('success');
 	}
 
@@ -36,9 +39,7 @@ class Controller_Event extends Controller{
 	}
 
 	public function action_removeapp(){
-		$greepf = new Greepf();
-		if($greepf->validate_request()){
-			$id = $greepf->get_request_param('id');
+		if($id = Greepf::setup('cycle')){
 			$event_log_msg = '';
 			try{
 	    		if(Auth::forge('quickauth')->delete_user($id)){
@@ -60,6 +61,6 @@ class Controller_Event extends Controller{
 			->execute();
 		}
 		return Response::forge('success');
-	}
 
+	}
 }

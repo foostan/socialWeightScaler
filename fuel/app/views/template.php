@@ -19,6 +19,6 @@
 		</div>
 	</div>
 	<?php echo Asset::js('jquery.js'); ?>
-	<?php echo Asset::js('jquery.mobile-1.2.0.js'); ?>
+	<?php //echo Asset::js('jquery.mobile-1.2.0.js'); ?>
 </body>
 </html>

@@ -217,10 +217,43 @@ class Auth_Login_QuickAuth extends \Auth_Login_Driver
 	}
 
 	/**
+	 * Check for login
+	 *
+	 * @return  bool
+	 */
+	protected function perform_check()
+	{
+		$username    = \Session::get('username');
+		$login_hash  = \Session::get('login_hash');
+
+		// only worth checking if there's both a username and login-hash
+		if ( ! empty($username) and ! empty($login_hash))
+		{
+			if (is_null($this->user) or ($this->user['username'] != $username))
+			{
+				$this->user = \DB::select_array(\Config::get('quickauth.table_columns', array('*')))
+					->where('username', '=', $username)
+					->from(\Config::get('quickauth.table_name'))
+					->execute(\Config::get('quickauth.db_connection'))->current();
+			}
+
+			// return true when login was verified
+			if ($this->user and $this->user['login_hash'] === $login_hash)
+			{
+				return true;
+			}
+		}
+
+		\Session::delete('username');
+		\Session::delete('login_hash');
+
+		return false;
+	}
+
+	/**
 	 * Disabled methods 
 	 */
 	public function get_groups(){ return array(); }
-	protected function perform_check(){ return false; }
 	public function get_email(){ return ''; }
 	public function get_screen_name(){ return ''; }
 }
