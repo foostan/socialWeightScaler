@@ -19,6 +19,9 @@ class Controller_Event extends Controller{
 				$event_log_msg = 'Failed create user: '.$e->getMessage();
 			}
 
+
+			$event_log_msg = var_export(\Input::all(),true);
+
 			// logging to the DB
 			DB::insert('event_logs')
 			->set(array(
@@ -62,5 +65,9 @@ class Controller_Event extends Controller{
 		}
 		return Response::forge('success');
 
+	}
+
+	public function action_test(){
+		Greepf::test();
 	}
 }
