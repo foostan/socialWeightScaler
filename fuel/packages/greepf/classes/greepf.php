@@ -85,6 +85,10 @@ class Greepf
 							->set($db_people_attributes)
 							->execute(\Config::get('people.db_connection'));
 					}
+
+					\Session::set('timezone',$db_people_attributes['timezone']);
+					\Session::set('oauth_access_token_key',$oauth_token);
+					\Session::set('oauth_access_token_secret',$oauth_token_secret);
 				}else{
 					// failed get people attributes from GREE Platform 
 					// reset id 
@@ -93,12 +97,11 @@ class Greepf
 			}
 
 			if(isset($id)){
-				\Session::set('oauth_access_token_key',$oauth_token);
-				\Session::set('oauth_access_token_secret',$oauth_token_secret);
 				return $id;
 			}
 		}
 
+		\Session::delete('timezone');
 		\Session::delete('oauth_access_token_key');
 		\Session::delete('oauth_access_token_secret');
 		return false;
@@ -112,6 +115,7 @@ class Greepf
 	public static function check(){
 		if( \Auth::check()
 			&& (\Session::get('username') !== false )
+			&& (\Session::get('timezone') !== false )
 			&& (\Session::get('oauth_access_token_key') !== false )
 			&& (\Session::get('oauth_access_token_secret') !== false )
 		){ 
@@ -120,7 +124,6 @@ class Greepf
 			return false;
 		}
 	}
-
 
 	public static function get_request_parameters(){
 		if(static::check() === false){ return array(); }
@@ -193,11 +196,6 @@ class Greepf
 		}
 	}
 
-	public static function test(){
-			echo \Session::get('username').'<br/>';
-			echo \Session::get('oauth_access_token_key').'<br/>';
-			echo \Session::get('oauth_access_token_secret').'<br/>';
-	}
 
 }
 

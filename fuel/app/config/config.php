@@ -17,10 +17,11 @@
 
 return array(
     'base_url' => '/',
-    'default_timezone' => 'Asia/Tokyo',
+    'default_timezone' => 'Europe/London',
 	'always_load' => array(
 	    'packages' => array(
 	        'auth',
+	        'orm',
 	        'greepf',
 	    ),
 	),

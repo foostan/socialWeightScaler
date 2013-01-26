@@ -3,16 +3,12 @@
 /**
  * The Timeline Controller.
  *
- * A basic controller example.  Has examples of how to set the
- * response body and status.
- * 
  * @package  app
  * @extends  Controller
  */
 class Controller_Timeline extends Controller_Template
 {
 	public $template = 'template';
-	private $greepf = null;
 
 	public function before(){
 		 parent::before();
@@ -27,8 +23,16 @@ class Controller_Timeline extends Controller_Template
 	 */
 	public function action_public()
 	{
+
+		$wslogs = Model_Wslog::find('all',array(
+			'join' => array('users'),
+			'on' => array('users.username','=','wslogs.username'),
+			'where' => array('share_with_everyone_is' => '1'),
+			'order_by' => array('measured_at' => 'desc'),
+		));
+		
 		$this->template->header = View::forge('timeline/header',array('scope'=>'public'));
-		$this->template->contents = ViewModel::forge('timeline/public');
+		$this->template->contents = View::forge('timeline/public',array('wslogs'=>$wslogs));
 	}
 
 	/**
@@ -39,8 +43,13 @@ class Controller_Timeline extends Controller_Template
 	 */
 	public function action_private()
 	{
+		$wslogs = Model_Wslog::find('all',array(
+			'where' => array('username' => \Session::get('username')),
+			'order_by' => array('measured_at' => 'desc'),
+		));
+
 		$this->template->header = View::forge('timeline/header',array('scope'=>'private'));
-		$this->template->contents = ViewModel::forge('timeline/private');
+		$this->template->contents = View::forge('timeline/private',array('wslogs'=>$wslogs));
 	}
 
 	/**

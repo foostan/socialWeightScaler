@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -14,21 +15,15 @@
 </head>
 
 <body>
-	<div data-role="page">
-		<div data-role="header" data-theme="a">
-			<div data-role="navbar" data-iconpos="top">
-				<ul>
-					<li><a href="<?php echo Uri::create('input/weight') ?>" data-icon="gear"  data-rel="dialog">Get on the scale!</a></li>
-				</ul>
-			</div>
+	<div data-role="dialog" data-thema="a">
+		<div data-role="content" data-theme="c">
+			<div class="content-primary"></div>
 		</div>
-		<div data-role="header" data-theme="c">
-			<?php echo $header ?>
-		</div>
-
-		<div data-role="content">
+		<div data-role="content" data-thema="a">
 			<?php echo $contents ?>
 		</div>
 	</div>
 </body>
 </html>
+
+
