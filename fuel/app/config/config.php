@@ -20,7 +20,6 @@ return array(
     'default_timezone' => 'Europe/London',
 	'always_load' => array(
 	    'packages' => array(
-	        'auth',
 	        'orm',
 	        'greepf',
 	    ),

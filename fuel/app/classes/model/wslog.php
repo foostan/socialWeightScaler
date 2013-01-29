@@ -5,11 +5,31 @@
  *
  */
 
+/*
+
+Needed database schema:
+
+CREATE TABLE IF NOT EXISTS `wslogs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `measured_at` int(11) NOT NULL,
+  `weight` float NOT NULL,
+  `body_fat` float NOT NULL,
+  `share_with_friends_is` tinyint(4) NOT NULL,
+  `share_with_everyone_is` tinyint(4) NOT NULL,
+  `comments` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `modified_at` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+*/
+
 class Model_Wslog extends Orm\Model{
 
  	protected static $_properties = array(
  		'id',
- 		'username',
+ 		'user_id',
  		'measured_at',
  		'weight',
  		'body_fat',

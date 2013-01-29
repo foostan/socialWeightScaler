@@ -5,8 +5,8 @@
  * See the individual environment DB configs for specific config information.
  */
 
-$j = json_decode(getenv('VCAP_SERVICES'));
-$mysql = $j->{'mysql-5.1'}[0]->{'credentials'};
+$j = json_decode(getenv('DB'));
+$mysql = $j->{'mysql'}[0];
 
 return array(
     'default' => array(

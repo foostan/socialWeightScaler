@@ -11,7 +11,7 @@ class Controller_Timeline extends Controller_Template
 	public $template = 'template';
 
 	public function before(){
-		 parent::before();
+		parent::before();
 		if (!Greepf::check()){ Response::redirect('auth/login'); }
 	}
 
@@ -26,7 +26,7 @@ class Controller_Timeline extends Controller_Template
 
 		$wslogs = Model_Wslog::find('all',array(
 			'join' => array('users'),
-			'on' => array('users.username','=','wslogs.username'),
+			'on' => array('users.user_id','=','wslogs.user_id'),
 			'where' => array('share_with_everyone_is' => '1'),
 			'order_by' => array('measured_at' => 'desc'),
 		));
@@ -44,7 +44,7 @@ class Controller_Timeline extends Controller_Template
 	public function action_private()
 	{
 		$wslogs = Model_Wslog::find('all',array(
-			'where' => array('username' => \Session::get('username')),
+			'where' => array('user_id' => Greepf::get_user_id()),
 			'order_by' => array('measured_at' => 'desc'),
 		));
 

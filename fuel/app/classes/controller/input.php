@@ -13,7 +13,7 @@ class Controller_Input extends Controller_Template
 	public $template = 'template_dialog';
 
 	public function before(){
-		 parent::before();
+		parent::before();
 		if (!Greepf::check()){ Response::redirect('auth/login'); }
 	}
 
@@ -42,7 +42,7 @@ class Controller_Input extends Controller_Template
 				$val = Model_Wslog::validate('add');
 				if ($val->run()){
 					$wslog = Model_Wslog::forge(array(
-						'username' => Session::get('username'),
+						'user_id' => Greepf::get_user_id(),
 						'measured_at' => Date::create_from_string(
 							Input::post('select-choice-year')
 							.'-'.Input::post('select-choice-month')

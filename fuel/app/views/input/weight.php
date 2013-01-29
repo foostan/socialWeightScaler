@@ -1,8 +1,8 @@
 <div class="content-primary">	
-
+test
 
 <?php
-	$today = Date::forge(Date::time()->get_timestamp()+\Session::get('timezone')*60);
+	$today = Date::forge(Date::time()->get_timestamp()+Greepf::get_user_difftime());
 	$month = $today->format("%m"); 
 	$day = $today->format("%d"); 
 	$year = $today->format("%Y"); 

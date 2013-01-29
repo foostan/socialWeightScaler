@@ -6,5 +6,8 @@ desktop.ini
 .buildpath
 .project
 .settings
+fuel/app/logs/*/*/*
+fuel/app/cache/*/*
 nbproject/
 .idea
+*.tmproj
