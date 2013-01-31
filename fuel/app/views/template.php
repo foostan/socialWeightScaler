@@ -47,7 +47,7 @@
 		<div data-role="header" data-theme="a">
 			<div data-role="navbar" data-iconpos="top">
 				<ul>
-					<li><a href="<?php echo Uri::create('wslog/add') ?>" data-icon="gear"  data-rel="dialog">Get on the scale!</a></li>
+					<li><a href="<?php echo Uri::create('wslog/add') ?>" data-icon="plus"  data-rel="dialog">Get on the scale!</a></li>
 				</ul>
 			</div>
 		</div>

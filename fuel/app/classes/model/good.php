@@ -31,13 +31,22 @@ class Model_Good extends Orm\Model
  		'nogood_is',
  	);
 
-	protected static $_has_one = array('user' => array(
-	    'model_to' => 'Model_User',
-	    'key_from' => 'user_id',
-	    'key_to' => 'id',
-	    'cascade_save' => false,
-	    'cascade_delete' => false,
-	));
+	protected static $_has_one = array(
+		'user' => array(
+			'model_to' => 'Model_User',
+			'key_from' => 'user_id',
+			'key_to' => 'id',
+			'cascade_save' => false,
+			'cascade_delete' => false,
+		),
+		'wslog' => array(
+			'model_to' => 'Model_Wslog',
+			'key_from' => 'wslog_id',
+			'key_to' => 'id',
+			'cascade_save' => false,
+			'cascade_delete' => false,
+		)
+	);
 
  	public static function validate($wslog)
 	{

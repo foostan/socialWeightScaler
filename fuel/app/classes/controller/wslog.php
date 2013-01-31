@@ -150,7 +150,7 @@ class Controller_Wslog extends Controller_Template
 		$wslog = Model_Wslog::find('first',array(
 			'where' => array(
 				array('user_id',Greepf::get_user_id()),
-				'and' => array('id',$id),
+				array('id',$id),
 			),
 		));
 		if($wslog)

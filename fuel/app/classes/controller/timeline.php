@@ -21,12 +21,13 @@ class Controller_Timeline extends Controller_Template
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_public()
+	public function action_public($offset = 0)
 	{
 
 		$wslogs = Model_Wslog::find('all',array(
 			'order_by' => array('measured_at' => 'desc', 'created_at' => 'desc'),
-			'limit' => 10,	
+			'limit' => 20,	
+			'offset' => $offset,	
 		));
 		
 		$this->template->header = View::forge('timeline/header',array('scope'=>'public'));
@@ -39,12 +40,13 @@ class Controller_Timeline extends Controller_Template
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_private()
+	public function action_private($offset = 0)
 	{
 		$wslogs = Model_Wslog::find('all',array(
 			'where' => array('user_id' => Greepf::get_user_id()),
 			'order_by' => array('measured_at' => 'desc', 'created_at' => 'desc'),
-			'limit' => 10,	
+			'limit' => 20,	
+			'offset' => $offset,	
 		));
 
 		$this->template->header = View::forge('timeline/header',array('scope'=>'private'));

@@ -55,8 +55,8 @@ class Model_Wslog extends Orm\Model
 
 	protected static $_has_many = array('goods' => array(
 	    'model_to' => 'Model_Good',
-	    'key_from' => 'wslog_id',
-	    'key_to' => 'id',
+	    'key_from' => 'id',
+	    'key_to' => 'wslog_id',
 	    'cascade_save' => true,
 	    'cascade_delete' => true,
 	));
