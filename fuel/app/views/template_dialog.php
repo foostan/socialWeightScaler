@@ -6,12 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>Social Weight Scaler</title>
 	<?php echo Asset::css('themes/default/jquery.mobile-1.2.0.css'); ?>
+	<?php echo Asset::css('weloveiconfonts.css'); ?>
 	<script type="text/javascript" src="http://pf-sb.gree.net/js/app/touch.js"></script>
 	<?php echo Asset::js('jquery.js'); ?>
 	<?php echo Asset::js('jquery.mobile-1.2.0.js'); ?>
 	<script>
 		$.mobile.ajaxEnabled = false;
 	</script>
+
 </head>
 
 <body>

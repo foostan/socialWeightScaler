@@ -1,5 +1,4 @@
 <div class="content-primary">	
-test
 
 <?php
 	$today = Date::forge(Date::time()->get_timestamp()+Greepf::get_user_difftime());
@@ -10,8 +9,13 @@ test
 
 	$month_strs = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
+	$last_weight = isset($last_wslog->weight) ? $last_wslog->weight : '50';
+	$last_body_fat = isset($last_wslog->body_fat) ? $last_wslog->body_fat : '20';
+	$last_share_with_friends_is = isset($last_wslog->share_with_friends_is) ? $last_wslog->share_with_friends_is : '0';
+	$last_share_with_everyone_is = isset($last_wslog->share_with_everyone_is) ? $last_wslog->share_with_everyone_is : '0';
+
 ?>
-<form action="<?php echo Uri::create('input/weight') ?>" method="post">
+<form action="<?php echo Uri::create('wslog/add') ?>" method="post">
 	<ul data-role="listview">
 
 		<li data-role="fieldcontain">
@@ -56,33 +60,37 @@ test
 		</li>
 
 		<li data-role="fieldcontain">
-			<label for="weight">Weight(kg):</label>
-			<input type="text" name="weight" id="weight" value="50.5"  />
+			<label for="weight">Weight:</label>
+			<input type="text" name="weight" id="weight" value="<?php echo $last_weight ; ?>"  />
 		</li>
 		<li data-role="fieldcontain">
-			<label for="body-fat">Body fat(%):</label>
-			<input type="text" name="body-fat" id="body-fat" value="12.4"  />
+			<label for="body-fat">Body fat:</label>
+			<input type="text" name="body-fat" id="body-fat" value="<?php echo $last_body_fat; ?>"  />
 		</li>
 		<li data-role="fieldcontain">
 			<label for="comments">Comments:</label>
 			<input type="text" name="comments" id="comments" value=""  />
 		</li>
 
+<!--
 		<li data-role="fieldcontain">
 			<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 				<legend>Share with my friends:</legend>
 				<select name="share-with-friends-is" id="share-with-friends-is" data-role="slider">
-					<option value="0">Off</option>
-					<option value="1">On</option>
+					<option value="0" <?php if($last_share_with_friends_is == '0') echo 'selected' ?>>Off</option>
+					<option value="1" <?php if($last_share_with_friends_is == '1') echo 'selected' ?>>On</option>
 				</select> 
 			</fieldset>
 		</li>
+-->
+		<input type="hidden" name="share-with-friends-is" value="0" />
+
 		<li data-role="fieldcontain">
 			<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 				<legend>Share with everyone:</legend>
 				<select name="share-with-everyone-is" id="share-with-everyone-is" data-role="slider">
-					<option value="0">Off</option>
-					<option value="1">On</option>
+					<option value="0" <?php if($last_share_with_everyone_is == '0') echo 'selected' ?>>Off</option>
+					<option value="1" <?php if($last_share_with_everyone_is == '1') echo 'selected' ?>>On</option>
 				</select> 
 			</fieldset>
 		</li>
@@ -90,10 +98,10 @@ test
 		<li>
 			<fieldset class="ui-grid-a">
 				<div class="ui-block-a">
-					<button type="submit" name="submit" value="cansel" data-theme="d" data-icon="delete">Cansel</button>
+					<a href="<?php echo Uri::create('timeline/public') ?>" data-role="button" data-theme="d" data-icon="delete">Cansel</a>
 				</div>
 				<div class="ui-block-b">
-					<button type="submit" name="submit" value="submit" data-theme="b" data-icon="check">Submit</button>
+					<button type="submit" data-theme="b" data-icon="check">Submit</button>
 				</div>
 			</fieldset>
 		</li>
