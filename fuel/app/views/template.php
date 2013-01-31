@@ -12,6 +12,34 @@
 	<script>
 		$.mobile.ajaxEnabled = false;
 	</script>
+	<script>
+		$(document).ready(function()
+			{
+			$(".gdbtn").bind('click',function(event)
+			{
+				if($(this).hasClass("ui-btn-active"))
+				{
+					count = Number($(this).find("span.count").text());
+					$(this).find("span.count").text(count-1);
+					$(this).removeClass("ui-btn-active");
+				}
+				else
+				{
+					count = Number($(this).find("span.count").text());
+					$(this).find("span.count").text(count+1);
+					$(this).addClass("ui-btn-active");
+		
+				}
+		
+				$.ajax({
+				    url: '<?php echo Uri::create('wslog/good') ?>/'+$(this).attr("data-type")+'/'+$(this).attr("data-id"),
+				})
+				.done(function( data ) {
+				});
+			});
+			
+		});
+	</script>
 </head>
 
 <body>

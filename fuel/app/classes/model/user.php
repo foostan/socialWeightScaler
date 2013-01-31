@@ -68,11 +68,23 @@ class Model_User extends Orm\Model{
  		'modified_at',
  	);
 
-	protected static $_has_many = array('wslogs' => array(
-	    'model_to' => 'Model_Wslog',
-	    'key_from' => 'id',
-	    'key_to' => 'user_id',
-	    'cascade_save' => true,
-	    'cascade_delete' => true,
-	));
+	protected static $_has_many = array(
+		'wslogs' => array(
+			'model_to' => 'Model_Wslog',
+			'key_from' => 'id',
+			'key_to' => 'user_id',
+			'cascade_save' => true,
+			'cascade_delete' => true,
+		),
+
+		'goods' => array(
+		    'model_to' => 'Model_Good',
+		    'key_from' => 'id',
+		    'key_to' => 'user_id',
+		    'cascade_save' => true,
+		    'cascade_delete' => true,
+		)
+	);
+
 }
+

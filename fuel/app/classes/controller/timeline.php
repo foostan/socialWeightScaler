@@ -26,9 +26,8 @@ class Controller_Timeline extends Controller_Template
 
 		$wslogs = Model_Wslog::find('all',array(
 			'order_by' => array('measured_at' => 'desc', 'created_at' => 'desc'),
+			'limit' => 10,	
 		));
-
-
 		
 		$this->template->header = View::forge('timeline/header',array('scope'=>'public'));
 		$this->template->contents = View::forge('timeline/public',array('wslogs'=>$wslogs));
@@ -45,20 +44,11 @@ class Controller_Timeline extends Controller_Template
 		$wslogs = Model_Wslog::find('all',array(
 			'where' => array('user_id' => Greepf::get_user_id()),
 			'order_by' => array('measured_at' => 'desc', 'created_at' => 'desc'),
+			'limit' => 10,	
 		));
 
 		$this->template->header = View::forge('timeline/header',array('scope'=>'private'));
 		$this->template->contents = View::forge('timeline/private',array('wslogs'=>$wslogs));
 	}
 
-	/**
-	 * The 404 action for the application.
-	 * 
-	 * @access  public
-	 * @return  Response
-	 */
-	public function action_404()
-	{
-		return Response::forge(ViewModel::forge('timeline/404'), 404);
-	}
 }

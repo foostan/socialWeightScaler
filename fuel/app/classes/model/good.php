@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This model defined a weight scale's log
+ * This model defined a good 
  *
  */
 
@@ -9,40 +9,26 @@
 
 Needed database schema:
 
-CREATE TABLE IF NOT EXISTS `wslogs` (
+CREATE TABLE IF NOT EXISTS `goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `measured_at` int(11) NOT NULL,
-  `weight` float NOT NULL,
-  `weight_diff` float NOT NULL,
-  `body_fat` float NOT NULL,
-  `body_fat_diff` float NOT NULL,
-  `share_with_friends_is` tinyint(4) NOT NULL,
-  `share_with_everyone_is` tinyint(4) NOT NULL,
-  `comments` text COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` int(11) NOT NULL,
-  `modified_at` int(11) NOT NULL,
+  `wslog_id` int(11) NOT NULL,
+  `good_is` tinyint(4) NOT NULL,
+  `nogood_is` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 */
 
-class Model_Wslog extends Orm\Model
+class Model_Good extends Orm\Model
 {
 
  	protected static $_properties = array(
  		'id',
  		'user_id',
- 		'measured_at',
- 		'weight',
- 		'weight_diff',
- 		'body_fat',
- 		'body_fat_diff',
- 		'comments',
- 		'share_with_friends_is',
- 		'share_with_everyone_is',
- 		'created_at',
- 		'modified_at',
+ 		'wslog_id',
+ 		'good_is',
+ 		'nogood_is',
  	);
 
 	protected static $_has_one = array('user' => array(
@@ -51,14 +37,6 @@ class Model_Wslog extends Orm\Model
 	    'key_to' => 'id',
 	    'cascade_save' => false,
 	    'cascade_delete' => false,
-	));
-
-	protected static $_has_many = array('goods' => array(
-	    'model_to' => 'Model_Good',
-	    'key_from' => 'wslog_id',
-	    'key_to' => 'id',
-	    'cascade_save' => true,
-	    'cascade_delete' => true,
 	));
 
  	public static function validate($wslog)
@@ -82,32 +60,4 @@ class Model_Wslog extends Orm\Model
 		else                 return "<span class=\"fontawesome-minus\"></span>";
 	}
 
-
-	public function how_many_good($type = 'good')
-	{
-
-		$column_name = $type==='good' ? 'good_is' : 'nogood_is';
-		$goods = Model_Good::find('all',array(
-			'where' => array(
-				array('wslog_id',$this->id),
-				array($column_name,true),
-			),
-		));
-
-		return count($goods);
-	}
-
-	public function has_good($type = 'good', $user_id = null)
-	{
-		$column_name = $type==='good' ? 'good_is' : 'nogood_is';
-		$good = Model_Good::find('first',array(
-			'where' => array(
-				array('user_id',$user_id),
-				array('wslog_id',$this->id),
-				array($column_name,true),
-			),
-		));
-
-		return $good ? true : false;
-	}
 }

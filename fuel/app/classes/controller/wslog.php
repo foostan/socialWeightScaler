@@ -106,6 +106,40 @@ class Controller_Wslog extends Controller_Template
 	}
 
 	/**
+	 * good 
+	 * 
+	 * @access  public
+	 * @return  Response
+	 */
+	public function action_good($type, $id)
+	{
+		$good = Model_Good::find('first',array(
+			'where' => array(
+				array('user_id',Greepf::get_user_id()),
+				array('wslog_id',$id),
+			),
+		));
+		if($good)
+		{
+			if($type=='good') $good->good_is = $good->good_is ? false : true;
+			else              $good->nogood_is = $good->nogood_is ? false : true;
+			$good->save();
+		}
+		else
+		{
+			$good = new Model_Good(array(
+				'user_id' => Greepf::get_user_id(),
+				'wslog_id' => $id,
+				'good_is' => true,
+				'nogood_is' => false,
+			));
+			$good->save();
+		}
+
+		Response::redirect('timeline/public');
+	}
+
+	/**
 	 * delete 
 	 * 
 	 * @access  public

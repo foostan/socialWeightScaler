@@ -25,8 +25,8 @@
 
 
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="" data-role="button" data-mini="true">Good! <span class="fontawesome-thumbs-up"></span> - 0</a>
-					<a href="" data-role="button" data-mini="true">No good! <span class="fontawesome-thumbs-down"></span> - 0</a>
+					<a href="#" data-role="button" data-mini="true" data-id="<?php echo $wslog->id; ?>" class="gdbtn <?php echo $wslog->has_good('good', Greepf::get_user_id()) ? 'ui-btn-active' : ''; ?>" data-type="good">Good! <span class="fontawesome-thumbs-up"></span> - <span class="count"><?php echo $wslog->how_many_good('good')?></span></a>
+					<a href="#" data-role="button" data-mini="true" data-id="<?php echo $wslog->id; ?>" class="gdbtn <?php echo $wslog->has_good('nogood', Greepf::get_user_id()) ? 'ui-btn-active' : ''; ?> " data-type="nogood">No good! <span class="fontawesome-thumbs-down"></span> - <span  class="count"><?php echo $wslog->how_many_good('nogood')?></span></a>
 				</div>
 
 

@@ -16,7 +16,7 @@
 					at <?php echo date_format(date_create_from_format('U', $wslog->measured_at+Greepf::get_user_difftime()), 'M. d, Y - H'); ?>
 				</p>
 				<p class="ui-li-desc">
-					Good! <span class="fontawesome-thumbs-up"></span> - 0 / No good! <span class="fontawesome-thumbs-down"></span> - 0 
+					Good! <span class="fontawesome-thumbs-up"></span> - <?php echo $wslog->how_many_good('good'); ?> / No good! <span class="fontawesome-thumbs-down"></span> - <?php echo $wslog->how_many_good('nogood'); ?>
 				</p>
 			</a>
 			<a href="<?php echo Uri::create('wslog/delete/'.$wslog->id) ?>" data-theme="c"></a>

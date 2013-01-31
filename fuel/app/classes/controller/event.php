@@ -13,12 +13,12 @@ class Controller_Event extends Controller{
 
 			try{
 
-$new_user = new Model_User(array(
-	'id'=>$id,
-	'created_at' => \Date::forge()->get_timestamp(),
-	'modified_at' => \Date::forge()->get_timestamp(),
-));
-$new_user->save();
+				$new_user = new Model_User(array(
+					'id'=>$id,
+					'created_at' => \Date::forge()->get_timestamp(),
+					'modified_at' => \Date::forge()->get_timestamp(),
+				));
+				$new_user->save();
 			}catch(Exception $e){
 				$event_log_msg = $e->getMessage();
 			}
