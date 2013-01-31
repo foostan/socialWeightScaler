@@ -7,16 +7,20 @@ class Controller_Event extends Controller{
 	}
 
 	public function action_addapp(){
-		if($id = Greepf::setup('cycle')){
-			$event_log_msg = '';
+		$user_request = Greepf::validate_api_response();
+		if($id = $user_request->get_parameter('id')){
+			$event_log_msg = "Appadd [$id]";
+
 			try{
-	    		if(Auth::forge('quickauth')->create_user($id)){
-					$event_log_msg = "Created user [$id]";
-				}else{
-					$event_log_msg = "Failed create user: Could not insert to the DB";
-				}
-			} catch(Exception $e){
-				$event_log_msg = 'Failed create user: '.$e->getMessage();
+
+$new_user = new Model_User(array(
+	'id'=>$id,
+	'created_at' => \Date::forge()->get_timestamp(),
+	'modified_at' => \Date::forge()->get_timestamp(),
+));
+$new_user->save();
+			}catch(Exception $e){
+				$event_log_msg = $e->getMessage();
 			}
 
 			// logging to the DB
@@ -39,16 +43,14 @@ class Controller_Event extends Controller{
 	}
 
 	public function action_removeapp(){
-		if($id = Greepf::setup('cycle')){
-			$event_log_msg = '';
+		$user_request = Greepf::validate_api_response();
+		if($id = $user_request->get_parameter('id')){
+			$event_log_msg = "Removeapp [$id]";
+
 			try{
-	    		if(Auth::forge('quickauth')->delete_user($id)){
-					$event_log_msg = "Deleted user [$id]";
-				}else{
-					$event_log_msg = "Failed delete user: Could not delete from the DB";
-				}
-			} catch(Exception $e){
-				$event_log_msg = 'Failed delete user: '.$e->getMessage();
+				Model_User::find($id)->delete();
+			}catch(Exception $e){
+				$event_log_msg = $e->getMessage();
 			}
 
 			// logging to the DB
@@ -60,6 +62,7 @@ class Controller_Event extends Controller{
 				))
 			->execute();
 		}
+
 		return Response::forge('success');
 
 	}

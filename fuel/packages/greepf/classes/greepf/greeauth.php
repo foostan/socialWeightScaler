@@ -112,7 +112,7 @@ class Greepf_Greeauth extends \Greepf_Driver {
 		\Session::set('user_id', $user_id);
 		\Session::set('login_hash', $this->create_login_hash());
 
-		return $this->update_attributes();
+		return $this->update_attributes($user_id);
 	}
 
 	/**
@@ -120,10 +120,13 @@ class Greepf_Greeauth extends \Greepf_Driver {
 	 *
 	 * @return bool 
 	 */
-	public function update_attributes()
+	public function update_attributes( $user_id=null )
 	{
-		$user_id = $this->get_user_id();
-		if(is_null($user_id)){ return false; } 
+		if(is_null($user_id))
+		{
+			$user_id = $this->get_user_id();
+			if(is_null($user_id)){ return false; } 
+		}
 
 		$people = $this->people_api(array(
 			'xoauth_requestor_id' => $user_id
